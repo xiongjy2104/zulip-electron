@@ -93,13 +93,13 @@
     "assert": "1.4.1",
     "devtron": "1.4.0",
     "electron-builder": "17.10.0",
-    "electron": "1.6.8",
+    "electron": "1.7.1",
     "electron-connect": "0.4.8",
     "gulp": "3.9.1",
     "gulp-mocha": "3.0.1",
     "chai-as-promised": "6.0.0",
     "chai": "^3.5.0",
-    "spectron": "3.6.4",
+    "spectron": "3.7.1",
     "xo": "0.18.1"
   },
   "xo": {
