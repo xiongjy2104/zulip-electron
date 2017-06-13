@@ -68,7 +68,6 @@ class ServerManagerView {
 				${nodeIntegration ? 'nodeIntegration' : ''}
 				disablewebsecurity
 				preload="js/preload.js"
-				useragent="${this.systemUtil.getUserAgent()}"
 				webpreferences="allowRunningInsecureContent, javascript=yes">
 			</webview>
 		`;
@@ -186,9 +185,18 @@ class ServerManagerView {
 		$webView.addEventListener('dom-ready', () => {
 			$webView.focus();
 		});
-
-		// eslint-disable-next-line no-unused-vars
+		// Set webview's user-agent
+		$webView.addEventListener('did-start-loading', () => {
+			let userAgent = this.systemUtil.getUserAgent();
+			if (!this.systemUtil.getUserAgent()) {
+				this.systemUtil.setUserAgent($webView.getUserAgent());
+				userAgent = this.systemUtil.getUserAgent();
+			}
+			$webView.setUserAgent(userAgent);
+		});
+		// eslint-disable-next-line arrow-parens
 		$webView.addEventListener('did-fail-load', (event) => {
+			// eslint-disable-next-line no-unused-vars
 			const {errorCode, errorDescription, validatedURL} = event;
 			const hasConnectivityErr = (this.systemUtil.connectivityERR.indexOf(errorDescription) >= 0);
 			if (hasConnectivityErr) {
@@ -233,7 +241,7 @@ class ServerManagerView {
 
 		ipcRenderer.on('focus', () => {
 			const activeWebview = document.getElementById(`webview-${this.activeTabIndex}`);
-			activeWebview.focus()
+			activeWebview.focus();
 		});
 
 		ipcRenderer.on('forward', () => {
