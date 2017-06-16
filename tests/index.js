@@ -72,10 +72,10 @@ describe('application launch', function () {
 
 		return this.app.client.waitUntilWindowLoaded(10000)
 			.then(() => createOrg(self.app.client, 'Zulip 1', 'chat.zulip.org', 1))
-			.then(switchToWebviewAtIndex.bind(null, self.app.client, 0))
-			.click('#add-action > i').pause(500)
-			.then(switchToWebviewAtIndex.bind(null, self.app.client, 2))
-			.then(() => createOrg(self.app.client, 'Zulip 2', 'chat.zulip.org', 2))
+			// .then(switchToWebviewAtIndex.bind(null, self.app.client, 0))
+			// .click('#add-action > i').pause(500)
+			// .then(switchToWebviewAtIndex.bind(null, self.app.client, 2))
+			// .then(() => createOrg(self.app.client, 'Zulip 2', 'chat.zulip.org', 2))
 	})
 })
 
